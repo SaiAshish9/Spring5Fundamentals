@@ -1,13 +1,31 @@
 package com.example.demo;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.ApplicationContext;
+//import org.springframework.boot.SpringApplication;
+//import org.springframework.boot.autoconfigure.SpringBootApplication;
+//import org.springframework.context.ApplicationContext;
 
 import com.example.demo.basic.BinarySearch;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.*;
+
+
+// spring-core where beans are defined
+// 
+
+//<dependency>
+//<groupId>org.springframework.boot</groupId>
+//<artifactId>spring-boot-starter</artifactId>
+//</dependency>
+
+
+
 // component scan 
 // automatically search packages and sub packages
-@SpringBootApplication
+//@SpringBootApplication
+
+@Configuration
+@ComponentScan
+// SpringBoot automatically defines package where configuration is present
 public class DemoApplication {
 
 	public static void main(String[] args) {
@@ -15,7 +33,9 @@ public class DemoApplication {
 //	    BinarySearch binarySearch=new BinarySearch(new QuickSort());
 	    
 //	Application Context ->	QuickSort And BubbleSort Beans are managed by application context
-		ApplicationContext applicationContext=SpringApplication.run(DemoApplication.class, args);	
+//		ApplicationContext applicationContext=SpringApplication.run(DemoApplication.class, args);	
+		ApplicationContext applicationContext=
+				new AnnotationConfigApplicationContext(DemoApplication.class);
 		BinarySearch binarySearch= applicationContext.getBean(BinarySearch.class);
 		BinarySearch binarySearch1= applicationContext.getBean(BinarySearch.class);
 		int result=binarySearch.binarySearch(new int[] {12,4,6,8},4);
