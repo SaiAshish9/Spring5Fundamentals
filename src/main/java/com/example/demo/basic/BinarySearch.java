@@ -1,10 +1,14 @@
 package com.example.demo.basic;
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Component
 //@Scope("prototype")
@@ -13,6 +17,9 @@ import org.springframework.stereotype.Component;
 // returns two different instances
 public class BinarySearch {
     
+	private Logger logger =
+		     (Logger) LoggerFactory.getLogger(this.getClass());
+	
 	@Autowired
 	@Qualifier("bubble")
 //	private SortAlgorithm bubbleSort
@@ -43,7 +50,18 @@ public class BinarySearch {
 
 	}
 
+//	LifeCycle of a bean --> PostConstruct and PreDestroy
 
+	@PostConstruct
+	public void postConstruct() {
+		logger.info("postConstruct");
+	}
+	
+	@PreDestroy
+	public void preDes() {
+		logger.info("preDestroy");
+	}
+	
 //	public void setSortAlgorithm(SortAlgorithm sortAlgorithm) {
 //		this.sortAlgorithm = sortAlgorithm;
 //	}
