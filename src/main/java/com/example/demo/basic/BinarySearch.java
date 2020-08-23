@@ -1,14 +1,22 @@
-package com.example.demo;
+package com.example.demo.basic;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.config.ConfigurableBeanFactory;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 @Component
+//@Scope("prototype")
+@Scope(ConfigurableBeanFactory.SCOPE_SINGLETON)
+//@Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
+// returns two different instances
 public class BinarySearch {
     
 	@Autowired
-	private SortAlgorithm bubbleSort;
-//    private SortAlgorithm sortAlgorithm;
+	@Qualifier("bubble")
+//	private SortAlgorithm bubbleSort
+    private SortAlgorithm sortAlgorithm;
 	
 //	private SortAlgorithm bubbleSort works without autowiring
 	
@@ -26,8 +34,8 @@ public class BinarySearch {
 
 	public int binarySearch(int[] numbers,int numberToSearch) {
 	
-		int[] sortedNumbers=bubbleSort.sort(numbers);
-        System.out.println(bubbleSort);
+		int[] sortedNumbers=sortAlgorithm.sort(numbers);
+        System.out.println(sortAlgorithm);
 //		linear search
 //		binary search loose coupling
 		
