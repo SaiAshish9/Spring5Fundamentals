@@ -13,12 +13,10 @@ public class DemoApplication {
 //	    BinarySearch binarySearch=new BinarySearch(new QuickSort());
 	    
 //	Application Context ->	QuickSort And BubbleSort Beans are managed by application context
-		
 		ApplicationContext applicationContext=SpringApplication.run(DemoApplication.class, args);	
 		BinarySearch binarySearch= applicationContext.getBean(BinarySearch.class);
 		int result=binarySearch.binarySearch(new int[] {12,4,6,8},4);
 	    System.out.println(result);
-	    
 	}
 }
 
